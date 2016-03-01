@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements View.OnClickListener  {
 
         // Remplissage de la liste avec la HashMap
         ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
-        appItemList.add(fillHashMap("Commander", "Accéder aux différents menus", String.valueOf(R.drawable.telephone)));
+        appItemList.add(fillHashMap("Commander +", "Accéder aux différents menus", String.valueOf(R.drawable.telephone)));
         appItemList.add(fillHashMap("Récupérer un sandwich", "Génère un Qr code", String.valueOf(R.drawable.telephone)));
         appItemList.add(fillHashMap("Annuler une commande", "Vous pouvez annuler avant 11h", String.valueOf(R.drawable.telephone)));
 
