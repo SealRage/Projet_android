@@ -25,17 +25,17 @@ public class MainActivity extends Activity implements View.OnClickListener  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // R�cup�ration de la listeview
+        // Récupération de la listeview
         _activityList = (ListView) findViewById(R.id.ListView_app);
 
         // Remplissage de la liste avec la HashMap
         ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
-        appItemList.add(fillHashMap("Photo", "Be a Selfie man", String.valueOf(R.drawable.telephone)));
-        appItemList.add(fillHashMap("Video", "We need you", String.valueOf(R.drawable.telephone)));
-        appItemList.add(fillHashMap("Add", "Add more things in your DB", String.valueOf(R.drawable.telephone)));
+        appItemList.add(fillHashMap("Commander", "Accéder aux différents menus", String.valueOf(R.drawable.telephone)));
+        appItemList.add(fillHashMap("Récupérer un sandwich", "Génère un Qr code", String.valueOf(R.drawable.telephone)));
+        appItemList.add(fillHashMap("Annuler une commande", "Vous pouvez annuler avant 11h", String.valueOf(R.drawable.telephone)));
 
 
-        // Cr�ation d'un SimpleAdapter qui met en correspondance les items pr�sents dans la list avec ceux de la vue
+        // Création d'un SimpleAdapter qui met en correspondance les items présents dans la list avec ceux de la vue
         SimpleAdapter itemsAdapter = new SimpleAdapter(this.getBaseContext(), appItemList, R.layout.app_item,
                 new String[] {"TextAppTitle", "TextAppSummary", "App_icon"}, new int[] {R.id.TextAppTitle,
                 R.id.TextAppSummary, R.id.App_icon});
@@ -43,7 +43,7 @@ public class MainActivity extends Activity implements View.OnClickListener  {
         //instanciation des images dans la liste
         _activityList.setAdapter(itemsAdapter);
 
-        //override de onItemClick pour l'adapter � la liste view
+        //override de onItemClick pour l'adapter à la liste view
         _activityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
