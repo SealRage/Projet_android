@@ -24,6 +24,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.srava.myapplication.MainActivity" />
         </activity>
+        <activity
+            android:name=".MenuListe"
+            android:label="@string/title_activity_menu_liste" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
