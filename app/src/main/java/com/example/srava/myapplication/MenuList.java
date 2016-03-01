@@ -28,7 +28,7 @@ public class MenuList extends Activity {
 
         // Remplissage de la liste avec la HashMap
         ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
-        appItemList.add(fillHashMap("Commander", "Remplir la liste bande vos morts", String.valueOf(R.drawable.telephone)));
+        appItemList.add(fillHashMap("Com mander", "Remplir la liste bande vos morts", String.valueOf(R.drawable.telephone)));
 
 
         // Création d'un SimpleAdapter qui met en correspondance les items présents dans la list avec ceux de la vue
