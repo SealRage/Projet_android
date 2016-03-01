@@ -1,6 +1,7 @@
 package com.example.srava.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class MainActivity extends Activity implements View.OnClickListener  {
+public class MainActivity extends Activity  {
 
     private ListView _activityList;
 
@@ -50,6 +51,10 @@ public class MainActivity extends Activity implements View.OnClickListener  {
 
                 switch (position) {
                     case 0:
+
+                        Log.d(" ok "," Menus ");
+                        Intent intentMenu = new Intent(MainActivity.this , MenuList.class);
+                        startActivity(intentMenu);
 
                         break;
 
@@ -92,10 +97,6 @@ public class MainActivity extends Activity implements View.OnClickListener  {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 
 
     private HashMap<String, String> fillHashMap(String Title, String summary, String icon){
