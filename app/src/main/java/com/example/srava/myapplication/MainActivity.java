@@ -1,17 +1,73 @@
 package com.example.srava.myapplication;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity implements View.OnClickListener  {
+
+    private ListView _activityList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Récupération de la listeview
+        _activityList = (ListView) findViewById(R.id.ListView_app);
+
+        // Remplissage de la liste avec la HashMap
+        ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
+        appItemList.add(fillHashMap("Photo", "Be a Selfie man", String.valueOf(R.drawable.telephone)));
+        appItemList.add(fillHashMap("Video", "We need you", String.valueOf(R.drawable.telephone)));
+        appItemList.add(fillHashMap("Add", "Add more things in your DB", String.valueOf(R.drawable.telephone)));
+
+
+        // Création d'un SimpleAdapter qui met en correspondance les items présents dans la list avec ceux de la vue
+        SimpleAdapter itemsAdapter = new SimpleAdapter(this.getBaseContext(), appItemList, R.layout.app_item,
+                new String[] {"TextAppTitle", "TextAppSummary", "App_icon"}, new int[] {R.id.TextAppTitle,
+                R.id.TextAppSummary, R.id.App_icon});
+
+        //instanciation des images dans la liste
+        _activityList.setAdapter(itemsAdapter);
+
+        //override de onItemClick pour l'adapter à la liste view
+        _activityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                switch (position) {
+                    case 0:
+
+                        break;
+
+                    case 1:
+
+                        break;
+
+                    case 2:
+
+
+                    default:
+
+                        break;
+
+                }
+
+            }
+        });
     }
 
     @Override
@@ -34,5 +90,19 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+
+    private HashMap<String, String> fillHashMap(String Title, String summary, String icon){
+        HashMap<String, String> item = new HashMap<String, String>();
+        item.put("TextAppTitle", Title);
+        item.put("TextAppSummary", summary);
+        item.put("App_icon", icon);
+        return item;
     }
 }
