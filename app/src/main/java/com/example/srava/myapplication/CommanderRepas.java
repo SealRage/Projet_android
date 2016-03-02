@@ -17,9 +17,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import com.example.srava.myapplication.Database.Menu;
+import com.example.srava.myapplication.Database.Produit;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class CommanderRepas extends android.support.v4.app.Fragment {
@@ -27,6 +32,9 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    protected Menu myMenu;
+    protected ArrayList<Produit> myProducts;
 
     private ListView _activityList;
     Activity activity = getActivity();
@@ -111,21 +119,33 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
                 switch (position) {
                     case 0:
 
-                        Log.d(" ok ", " Menus ");
-                        //Intent intentMenu = new Intent(CommanderRepas.this , MenuListe.class);
-                        // startActivity(intentMenu);
 
+                        Log.d(" ok ", " Menus ");
+                        myMenu = new Menu("Classique",1,0.00,myProducts);
                         break;
 
                     case 1:
 
+                        Log.d(" ok ", " Gourmand ");
+                        myMenu = new Menu("Gourmand",2,0.00,myProducts);
                         break;
 
                     case 2:
 
+                        Log.d(" ok ", " Gourmand + ");
+                        myMenu = new Menu("Gourmand +",3,0.00,myProducts);
+                        break;
+
+                    case 3:
+
+                        Log.d(" ok ", " Divers ");
+                        myMenu = new Menu("Divers",0,0.00,myProducts);
+                        break;
 
                     default:
 
+                        Log.d(" ok ", " Erreur ");
+                        Toast.makeText(getActivity(),"Erreur dans la matrice",Toast.LENGTH_SHORT).show();
                         break;
 
                 }
@@ -141,5 +161,10 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
         item.put("TextAppSummary", summary);
         item.put("App_icon", icon);
         return item;
+    }
+
+    public void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        // store data in the bundle
     }
 }

@@ -19,9 +19,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.srava.myapplication.Database.Commande;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MenuListe extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    protected ArrayList<com.example.srava.myapplication.Database.Menu> myChoicesMenus;
+    protected Commande myCommande = new Commande(myChoicesMenus,"");
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -63,6 +71,9 @@ public class MenuListe extends ActionBarActivity
             case 2 :
                 myFragment = new AnnulerMenu();
                 break;
+            case 3 :
+              //  myFragment = new SeeCommande();
+                break;
             default:
 
                 break;
@@ -79,12 +90,16 @@ public class MenuListe extends ActionBarActivity
         switch (number) {
             case 1:
                 mTitle = getString(R.string.CommanderM);
+
                 break;
             case 2:
                 mTitle = getString(R.string.RecupM);
                 break;
             case 3:
                 mTitle = getString(R.string.AnnulerM);
+                break;
+            case 4:
+                mTitle = "yo";
                 break;
             default:
 

@@ -10,7 +10,7 @@ public class Menu {
 
     protected int idMenu;
     protected String nameMenu;
-    protected String typeMenu;
+    protected int typeMenu;
     protected List<Produit> composantMenu;
     protected double prix;
 
@@ -38,11 +38,11 @@ public class Menu {
         this.prix = prix;
     }
 
-    public String getTypeMenu() {
+    public int getTypeMenu() {
         return typeMenu;
     }
 
-    public void setTypeMenu(String typeMenu) {
+    public void setTypeMenu(int typeMenu) {
         this.typeMenu = typeMenu;
     }
 
@@ -54,8 +54,8 @@ public class Menu {
         this.composantMenu = composantMenu;
     }
 
-    public Menu(int idMenu, String nameMenu, String typeMenu, double prix, ArrayList<Produit> composantMenu) {
-        this.idMenu = idMenu;
+    public Menu( String nameMenu, int typeMenu, double prix, ArrayList<Produit> composantMenu) {
+
         this.nameMenu = nameMenu;
         this.typeMenu = typeMenu;
         this.prix = prix;
