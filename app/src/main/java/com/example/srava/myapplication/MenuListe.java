@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -62,6 +63,9 @@ public class MenuListe extends ActionBarActivity
             case 2 :
                 myFragment = new AnnulerMenu();
                 break;
+            default:
+
+                break;
         }
 
         // update the main content by replacing fragments
@@ -81,6 +85,9 @@ public class MenuListe extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.AnnulerM);
+                break;
+            default:
+
                 break;
         }
     }

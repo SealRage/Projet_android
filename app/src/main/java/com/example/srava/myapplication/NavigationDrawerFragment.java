@@ -228,7 +228,10 @@ public class NavigationDrawerFragment extends Fragment {
         super.onConfigurationChanged(newConfig);
         // Forward the new configuration the drawer toggle component.
         mDrawerToggle.onConfigurationChanged(newConfig);
+
     }
+
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
