@@ -53,7 +53,7 @@ public class MainActivity extends Activity  {
                     case 0:
 
                         Log.d(" ok "," Menus ");
-                        Intent intentMenu = new Intent(MainActivity.this , MenuList.class);
+                        Intent intentMenu = new Intent(MainActivity.this , MenuListe.class);
                         startActivity(intentMenu);
 
                         break;

@@ -49,23 +49,38 @@ public class MenuListe extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+
+        Fragment myFragment = new Fragment();
+
+        switch (position) {
+            case 0 :
+                myFragment = new CommanderRepas();
+                break;
+            case 1 :
+                myFragment = new RecupererMenu();
+                break;
+            case 2 :
+                myFragment = new AnnulerMenu();
+                break;
+        }
+
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, myFragment)
                 .commit();
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = getString(R.string.title_section1);
+                mTitle = getString(R.string.CommanderM);
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                mTitle = getString(R.string.RecupM);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = getString(R.string.AnnulerM);
                 break;
         }
     }
