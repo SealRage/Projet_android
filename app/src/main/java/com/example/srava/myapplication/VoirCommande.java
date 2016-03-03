@@ -92,10 +92,11 @@ public class VoirCommande extends android.support.v4.app.Fragment {
 
         // Remplissage de la liste avec la HashMap
         ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
+
+        //On met le forpour tout récupérer
+        // TODO : METTRE LE FOR
         appItemList.add(fillHashMap("Formule Classique", "1 Sandwich + 2 parmi chips, eau, fruit", String.valueOf(R.drawable.telephone)));
-        appItemList.add(fillHashMap("Formule Gourmand", "1 Sdch Spé + 2 parmi chips, eau, fruit", String.valueOf(R.drawable.telephone)));
-        appItemList.add(fillHashMap("Formule Gourmand +", "Formule gourmand + 1 canette", String.valueOf(R.drawable.telephone)));
-        appItemList.add(fillHashMap("Divers", "Vente au détail", String.valueOf(R.drawable.telephone)));
+
 
         // Création d'un SimpleAdapter qui met en correspondance les items présents dans la list avec ceux de la vue
         SimpleAdapter itemsAdapter = new SimpleAdapter(this.getActivity(), appItemList, R.layout.app_item,
@@ -113,7 +114,7 @@ public class VoirCommande extends android.support.v4.app.Fragment {
                 switch (position) {
                     case 0:
 
-
+                        //TODO : METTRE UNE POP UP POUR LA SUPRESSION OU LA CONSULTATION
                         Log.d(" ok ", " Menus ");
                         myMenu = new Menu("Classique",1,0.00,myProducts);
                         break;

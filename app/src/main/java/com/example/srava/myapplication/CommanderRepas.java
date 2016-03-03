@@ -119,7 +119,7 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
                 switch (position) {
                     case 0:
 
-
+                        // TODO : IMPLEMENTER LES SANDWICHS ET LA BDD
                         Log.d(" ok ", " Menus ");
                         myMenu = new Menu("Classique",1,0.00,myProducts);
                         break;
