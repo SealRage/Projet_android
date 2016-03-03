@@ -42,4 +42,8 @@ public class Commande {
         RecapChoix = recapChoix;
         this.dateCommande = dateCommande;
     }
+
+    public Commande(){
+
+    }
 }

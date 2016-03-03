@@ -28,6 +28,7 @@ import java.util.List;
 public class MenuListe extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+
     protected ArrayList<com.example.srava.myapplication.Database.Menu> myChoicesMenus;
     protected Commande myCommande = new Commande(myChoicesMenus,"");
 
@@ -72,7 +73,7 @@ public class MenuListe extends ActionBarActivity
                 myFragment = new AnnulerMenu();
                 break;
             case 3 :
-              //  myFragment = new SeeCommande();
+                myFragment = new VoirCommande();
                 break;
             default:
 
@@ -90,7 +91,6 @@ public class MenuListe extends ActionBarActivity
         switch (number) {
             case 1:
                 mTitle = getString(R.string.CommanderM);
-
                 break;
             case 2:
                 mTitle = getString(R.string.RecupM);
@@ -99,7 +99,7 @@ public class MenuListe extends ActionBarActivity
                 mTitle = getString(R.string.AnnulerM);
                 break;
             case 4:
-                mTitle = "yo";
+                mTitle = "Voir la commande";
                 break;
             default:
 
