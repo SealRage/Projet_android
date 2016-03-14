@@ -9,7 +9,7 @@ import java.util.List;
 public class Commande {
 
     protected int idCommande;
-    protected List<Menu> RecapChoix;
+    protected List<Menu> RecapChoix = new ArrayList<Menu>();
     protected String dateCommande;
 
     public int getIdCommande() {
@@ -46,4 +46,28 @@ public class Commande {
     public Commande(){
 
     }
+
+    public boolean checkProductInCart(Menu aProduct) {
+
+        return RecapChoix.contains(aProduct);
+
+    }
+
+    public void setProducts(Menu Products) {
+
+        RecapChoix.add(Products);
+
+    }
+    public int getCommandeSize() {
+
+        return RecapChoix.size();
+
+    }
+
+    public Menu getProducts(int pPosition) {
+
+        return RecapChoix.get(pPosition);
+    }
+
+
 }

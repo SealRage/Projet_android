@@ -20,4 +20,5 @@
     <string name="AnnulerM">Annuler la commande</string>
     <string name="RecupM">Récuperer la commande</string>
     <string name="CommanderM">Commander un repas</string>
+    <string name="voirCommande">Voir la commande</string>
 </resources>

@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.example.srava.myapplication.Database.Menu;
 import com.example.srava.myapplication.Database.Produit;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,8 +34,10 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    protected  Menu myMenu ;
+    //Get Global Controller Class object (see application tag in AndroidManifest.xml)
+    final Controller aController = (Controller) getContext();
 
-    protected Menu myMenu;
     protected ArrayList<Produit> myProducts;
 
     private ListView _activityList;
@@ -92,18 +96,18 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-
-        // Récupération de la listeview
+        final Controller aController = (Controller) getActivity().getApplicationContext();
+        // RÃ©cupÃ©ration de la listeview
         _activityList = (ListView) view.findViewById(R.id.ListView_Menu);
 
-        // Remplissage de la liste avec la HashMap
+        //7 Remplissage de la liste avec la HashMap
         ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
         appItemList.add(fillHashMap("Formule Classique", "1 Sandwich + 2 parmi chips, eau, fruit", String.valueOf(R.drawable.telephone)));
-        appItemList.add(fillHashMap("Formule Gourmand", "1 Sdch Spé + 2 parmi chips, eau, fruit", String.valueOf(R.drawable.telephone)));
+        appItemList.add(fillHashMap("Formule Gourmand", "1 Sdch SpÃ© + 2 parmi chips, eau, fruit", String.valueOf(R.drawable.telephone)));
         appItemList.add(fillHashMap("Formule Gourmand +", "Formule gourmand + 1 canette", String.valueOf(R.drawable.telephone)));
-        appItemList.add(fillHashMap("Divers", "Vente au détail", String.valueOf(R.drawable.telephone)));
+        appItemList.add(fillHashMap("Divers", "Vente au dÃ©tail", String.valueOf(R.drawable.telephone)));
 
-        // Création d'un SimpleAdapter qui met en correspondance les items présents dans la list avec ceux de la vue
+        // CrÃ©ation d'un SimpleAdapter qui met en correspondance les items prÃ©sents dans la list avec ceux de la vue
         SimpleAdapter itemsAdapter = new SimpleAdapter(this.getActivity(), appItemList, R.layout.app_item,
                 new String[] {"TextAppTitle", "TextAppSummary", "App_icon"}, new int[] {R.id.TextAppTitle,
                 R.id.TextAppSummary, R.id.App_icon});
@@ -111,46 +115,73 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
         //instanciation des images dans la liste
         _activityList.setAdapter(itemsAdapter);
 
-        //override de onItemClick pour l'adapter à la liste view
+        //override de onItemClick pour l'adapter Ã  la liste view
         _activityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {Log.d(" ok ", " Gourmand + ");
 
                 switch (position) {
                     case 0:
 
-                        // TODO : IMPLEMENTER LES SANDWICHS ET LA BDD
+                        //TODO : METTRE UNE POP UP POUR LA SUPRESSION OU LA CONSULTATION
                         Log.d(" ok ", " Menus ");
-                        myMenu = new Menu("Classique",1,0.00,myProducts);
+                        myMenu = new Menu(0,"Classique",1,0.00,myProducts);
                         break;
 
                     case 1:
 
                         Log.d(" ok ", " Gourmand ");
-                        myMenu = new Menu("Gourmand",2,0.00,myProducts);
+                        myMenu = new Menu(1,"Gourmand",2,0.00,myProducts);
                         break;
 
                     case 2:
 
                         Log.d(" ok ", " Gourmand + ");
-                        myMenu = new Menu("Gourmand +",3,0.00,myProducts);
+                        myMenu = new Menu(2,"Gourmand +",3,0.00,myProducts);
                         break;
 
                     case 3:
 
                         Log.d(" ok ", " Divers ");
-                        myMenu = new Menu("Divers",0,0.00,myProducts);
+                        myMenu = new Menu(3,"Divers",0,0.00,myProducts);
                         break;
 
                     default:
 
                         Log.d(" ok ", " Erreur ");
-                        Toast.makeText(getActivity(),"Erreur dans la matrice",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Erreur dans la matrice", Toast.LENGTH_SHORT).show();
                         break;
 
                 }
 
+                Log.d("bis1",String.valueOf(aController));
+                Log.d("bis",String.valueOf(myMenu));
+                //store product object to arraylist in controller
+                aController.setProducts(myMenu);
+                Log.d(" ok ", String.valueOf(position));
+                // Get product instance for index
+                Menu tempProductObject = aController.getProducts(position);
+
+                //Check Product already exist in Cart or Not
+                if (!aController.getCommande().checkProductInCart(tempProductObject)) {
+                    Toast.makeText(getActivity(), "Added", Toast.LENGTH_LONG);
+
+
+                    // Product not Exist in cart so add product to
+                    // Cart product arraylist
+                    aController.getCommande().setProducts(tempProductObject);
+
+                    Toast.makeText(getActivity(), "Now Cart size: " + aController.getCommande().getCommandeSize(),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    // Cart product arraylist contains Product
+                    Toast.makeText(getActivity(), "Product " + (position) + " already added in cart.",
+                            Toast.LENGTH_LONG).show();
+                }
+
             }
+
+
         });
 
     }

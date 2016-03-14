@@ -99,7 +99,7 @@ public class MenuListe extends ActionBarActivity
                 mTitle = getString(R.string.AnnulerM);
                 break;
             case 4:
-                mTitle = "Voir la commande";
+                mTitle = getString(R.string.voirCommande);
                 break;
             default:
 

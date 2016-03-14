@@ -54,8 +54,8 @@ public class Menu {
         this.composantMenu = composantMenu;
     }
 
-    public Menu( String nameMenu, int typeMenu, double prix, ArrayList<Produit> composantMenu) {
-
+    public Menu(int idMenu, String nameMenu, int typeMenu, double prix, ArrayList<Produit> composantMenu) {
+        this.idMenu = idMenu;
         this.nameMenu = nameMenu;
         this.typeMenu = typeMenu;
         this.prix = prix;

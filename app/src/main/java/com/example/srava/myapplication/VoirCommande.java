@@ -30,6 +30,14 @@ public class VoirCommande extends android.support.v4.app.Fragment {
     protected Menu myMenu;
     protected ArrayList<Produit> myProducts;
 
+    //Get Global Controller Class object (see application tag in AndroidManifest.xml)
+    final Controller aController = (Controller) getContext();
+
+    // Get Cart Size
+   // final int cartSize = aController.getCommande().getCommandeSize();
+
+    String showString = "";
+
     private ListView _activityList;
     Activity activity = getActivity();
     // TODO: Rename and change types of parameters
@@ -85,20 +93,37 @@ public class VoirCommande extends android.support.v4.app.Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        final Controller aController = (Controller) getActivity().getApplicationContext();
+
+        // Get Cart Size
+        final int cartSize = aController.getCommande().getCommandeSize();
 
 
-        // Récupération de la listeview
+        // RÃ©cupÃ©ration de la listeview
         _activityList = (ListView) view.findViewById(R.id.ListView_Menu);
 
         // Remplissage de la liste avec la HashMap
         ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
 
-        //On met le forpour tout récupérer
+        //On met le forpour tout rÃ©cupÃ©rer
         // TODO : METTRE LE FOR
-        appItemList.add(fillHashMap("Formule Classique", "1 Sandwich + 2 parmi chips, eau, fruit", String.valueOf(R.drawable.telephone)));
+        if(cartSize >0)
+        {
 
+            for(int i=0;i<cartSize;i++)
+            {
+                //Get product details
+                String pName = aController.getCommande().getProducts(i).getNameMenu();
+                String pDesc = String.valueOf(aController.getCommande().getProducts(i).getComposantMenu());
+              //  String pDisc   	= aController.getCommande().getProducts(i).getDrawable();
 
-        // Création d'un SimpleAdapter qui met en correspondance les items présents dans la list avec ceux de la vue
+                appItemList.add(fillHashMap(pName, pDesc, String.valueOf(R.drawable.telephone)));
+            }
+        }
+        else
+            showString = "\n\nShopping cart is empty.\n\n";
+
+        // CrÃ©ation d'un SimpleAdapter qui met en correspondance les items prÃ©sents dans la list avec ceux de la vue
         SimpleAdapter itemsAdapter = new SimpleAdapter(this.getActivity(), appItemList, R.layout.app_item,
                 new String[] {"TextAppTitle", "TextAppSummary", "App_icon"}, new int[] {R.id.TextAppTitle,
                 R.id.TextAppSummary, R.id.App_icon});
@@ -106,7 +131,7 @@ public class VoirCommande extends android.support.v4.app.Fragment {
         //instanciation des images dans la liste
         _activityList.setAdapter(itemsAdapter);
 
-        //override de onItemClick pour l'adapter à la liste view
+        //override de onItemClick pour l'adapter Ã  la liste view
         _activityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -116,25 +141,25 @@ public class VoirCommande extends android.support.v4.app.Fragment {
 
                         //TODO : METTRE UNE POP UP POUR LA SUPRESSION OU LA CONSULTATION
                         Log.d(" ok ", " Menus ");
-                        myMenu = new Menu("Classique",1,0.00,myProducts);
+                        myMenu = new Menu(0,"Classique",1,0.00,myProducts);
                         break;
 
                     case 1:
 
                         Log.d(" ok ", " Gourmand ");
-                        myMenu = new Menu("Gourmand",2,0.00,myProducts);
+                        myMenu = new Menu(1,"Gourmand",2,0.00,myProducts);
                         break;
 
                     case 2:
 
                         Log.d(" ok ", " Gourmand + ");
-                        myMenu = new Menu("Gourmand +",3,0.00,myProducts);
+                        myMenu = new Menu(2,"Gourmand +",3,0.00,myProducts);
                         break;
 
                     case 3:
 
                         Log.d(" ok ", " Divers ");
-                        myMenu = new Menu("Divers",0,0.00,myProducts);
+                        myMenu = new Menu(3,"Divers",0,0.00,myProducts);
                         break;
 
                     default:
