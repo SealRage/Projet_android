@@ -8,19 +8,19 @@ import java.util.List;
  */
 public class Menu {
 
-    protected int idMenu;
+    //protected int idMenu;
     protected String nameMenu;
     protected int typeMenu;
     protected List<Produit> composantMenu;
     protected double prix;
 
-    public int getIdMenu() {
+    /*public int getIdMenu() {
         return idMenu;
     }
 
     public void setIdMenu(int idMenu) {
         this.idMenu = idMenu;
-    }
+    }*/
 
     public String getNameMenu() {
         return nameMenu;

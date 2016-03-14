@@ -82,10 +82,10 @@ public class MenuAdapter extends MenuHelper{
             return reponse;
         }
 
-        public Cursor getAllShotsOfAtype(String type_media){
+        public Cursor getAllShotsOfAtype(String type_menu){
             Cursor reponse = shotsDB.query(MenuHelper .NOM_TABLE, new String[]{
                             MenuHelper.KEY_ID, MenuHelper.KEY_NAME, MenuHelper.KEY_TYPE,
-                            MenuHelper.KEY_PRIX, MenuHelper.KEY_COMP }, MenuHelper.KEY_TYPE + " = " + type_media, null, null,
+                            MenuHelper.KEY_PRIX, MenuHelper.KEY_COMP }, MenuHelper.KEY_TYPE + " = " + type_menu, null, null,
                     null, null, null);
             return reponse;
         }
