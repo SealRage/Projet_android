@@ -18,7 +18,7 @@ public class MenuAdapter extends MenuHelper{
         private static final String DATABASE_NAME = "cafet";
         private static final int DATABASE_VERSION = 1;
         private MenuHelper dbHelper; // r?f?rence vers le Helper de gestion de la base
-        private SQLiteDatabase shotsDB; // reference vers une base de donn?es
+        private SQLiteDatabase menuDB; // reference vers une base de donn?es
 
 
         // constructeur
@@ -29,12 +29,12 @@ public class MenuAdapter extends MenuHelper{
 
         public void open() throws SQLiteException {
             try{
-                shotsDB=dbHelper.getWritableDatabase();
+                menuDB=dbHelper.getWritableDatabase();
                 // LogCat message
-                Log.i("MyShotsAdapter", "Base ouverte en ecriture " + shotsDB);
+                Log.i("MyShotsAdapter", "Base ouverte en ecriture " + menuDB);
             }catch (SQLiteException e){
-                shotsDB=dbHelper.getReadableDatabase();
-                Log.i("MyShotsAdapter", "Base ouverte en lecture " + shotsDB);
+                menuDB=dbHelper.getReadableDatabase();
+                Log.i("MyShotsAdapter", "Base ouverte en lecture " + menuDB);
             }
         }
         public void close(){
@@ -50,7 +50,7 @@ public class MenuAdapter extends MenuHelper{
             newValue.put(dbHelper.KEY_PRIX, prix);
             newValue.put(dbHelper.KEY_COMP, String.valueOf(composantMenu));
 
-            return shotsDB.insert(MenuHelper.NOM_TABLE, null, newValue);
+            return menuDB.insert(MenuHelper.NOM_TABLE, null, newValue);
         }
 
 
@@ -61,21 +61,21 @@ public class MenuAdapter extends MenuHelper{
             newValue.put(dbHelper.KEY_PRIX, prix);
             newValue.put(dbHelper.KEY_COMP, String.valueOf(composantMenu));
 
-            return shotsDB.update(MenuHelper.NOM_TABLE, newValue,
+            return menuDB.update(MenuHelper.NOM_TABLE, newValue,
                     MenuHelper.KEY_ID + " = " + ligneID, null) > 0;
         }
 
         public boolean removeShot(long ligneID){
-            return shotsDB.delete(MenuHelper.NOM_TABLE, MenuHelper.KEY_ID + " = " + ligneID,
+            return menuDB.delete(MenuHelper.NOM_TABLE, MenuHelper.KEY_ID + " = " + ligneID,
                     null)>0;
         }
 
         public Cursor getAllData(){ // select *
-            return shotsDB.query(dbHelper.NOM_TABLE, new String[]{ MenuHelper.KEY_ID,
+            return menuDB.query(dbHelper.NOM_TABLE, new String[]{ MenuHelper.KEY_ID,
                     MenuHelper.KEY_NAME, MenuHelper.KEY_TYPE, MenuHelper.KEY_PRIX, MenuHelper.KEY_COMP },null, null, null, null, null, null); }
 
         public Cursor getSingleShot(long ligneID){
-            Cursor reponse = shotsDB.query(MenuHelper .NOM_TABLE, new String[]{
+            Cursor reponse = menuDB.query(MenuHelper .NOM_TABLE, new String[]{
                             MenuHelper.KEY_ID, MenuHelper.KEY_NAME, MenuHelper.KEY_TYPE,
                             MenuHelper.KEY_PRIX,MenuHelper.KEY_COMP }, MenuHelper.KEY_ID + " = " + ligneID, null, null, null,
                     null, null);
@@ -83,7 +83,7 @@ public class MenuAdapter extends MenuHelper{
         }
 
         public Cursor getAllShotsOfAtype(String type_menu){
-            Cursor reponse = shotsDB.query(MenuHelper .NOM_TABLE, new String[]{
+            Cursor reponse = menuDB.query(MenuHelper .NOM_TABLE, new String[]{
                             MenuHelper.KEY_ID, MenuHelper.KEY_NAME, MenuHelper.KEY_TYPE,
                             MenuHelper.KEY_PRIX, MenuHelper.KEY_COMP }, MenuHelper.KEY_TYPE + " = " + type_menu, null, null,
                     null, null, null);

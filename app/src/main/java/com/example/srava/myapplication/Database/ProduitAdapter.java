@@ -18,7 +18,7 @@ public class ProduitAdapter extends ProduitHelper{
     private static final String DATABASE_NAME = "cafet";
     private static final int DATABASE_VERSION = 1;
     private ProduitHelper dbHelper; // r?f?rence vers le Helper de gestion de la base
-    private SQLiteDatabase shotsDB; // reference vers une base de donn?es
+    private SQLiteDatabase produitDB; // reference vers une base de donn?es
 
 
     // constructeur
@@ -29,12 +29,12 @@ public class ProduitAdapter extends ProduitHelper{
 
     public void open() throws SQLiteException {
         try{
-            shotsDB=dbHelper.getWritableDatabase();
+            produitDB=dbHelper.getWritableDatabase();
             // LogCat message
-            Log.i("MyShotsAdapter", "Base ouverte en ecriture " + shotsDB);
+            Log.i("MyShotsAdapter", "Base ouverte en ecriture " + produitDB);
         }catch (SQLiteException e){
-            shotsDB=dbHelper.getReadableDatabase();
-            Log.i("MyShotsAdapter", "Base ouverte en lecture " + shotsDB);
+            produitDB=dbHelper.getReadableDatabase();
+            Log.i("MyShotsAdapter", "Base ouverte en lecture " + produitDB);
         }
     }
     public void close(){
@@ -49,7 +49,7 @@ public class ProduitAdapter extends ProduitHelper{
         newValue.put(ProduitHelper.KEY_TYPE, typeProduit);
         newValue.put(ProduitHelper.KEY_PRIX, prix);
 
-        return shotsDB.insert(ProduitHelper.NOM_TABLE, null, newValue);
+        return produitDB.insert(ProduitHelper.NOM_TABLE, null, newValue);
     }
 
 
@@ -59,21 +59,21 @@ public class ProduitAdapter extends ProduitHelper{
         newValue.put(dbHelper.KEY_TYPE, typeProduit);
         newValue.put(dbHelper.KEY_PRIX, prix);
 
-        return shotsDB.update(ProduitHelper.NOM_TABLE, newValue,
+        return produitDB.update(ProduitHelper.NOM_TABLE, newValue,
                 ProduitHelper.KEY_ID + " = " + ligneID, null) > 0;
     }
 
     public boolean removeShot(long ligneID){
-        return shotsDB.delete(ProduitHelper.NOM_TABLE, ProduitHelper.KEY_ID + " = " + ligneID,
+        return produitDB.delete(ProduitHelper.NOM_TABLE, ProduitHelper.KEY_ID + " = " + ligneID,
                 null)>0;
     }
 
     public Cursor getAllData(){ // select *
-        return shotsDB.query(dbHelper.NOM_TABLE, new String[]{ ProduitHelper.KEY_ID,
+        return produitDB.query(dbHelper.NOM_TABLE, new String[]{ProduitHelper.KEY_ID,
                 ProduitHelper.KEY_NAME, ProduitHelper.KEY_TYPE, ProduitHelper.KEY_PRIX}, null, null, null, null, null); }
 
     public Cursor getSingleShot(long ligneID){
-        Cursor reponse = shotsDB.query(ProduitHelper .NOM_TABLE, new String[]{
+        Cursor reponse = produitDB.query(ProduitHelper .NOM_TABLE, new String[]{
                         ProduitHelper.KEY_ID, ProduitHelper.KEY_NAME, ProduitHelper.KEY_TYPE,
                         ProduitHelper.KEY_PRIX}, ProduitHelper.KEY_ID + " = " + ligneID, null, null,
                 null, null);
@@ -81,7 +81,7 @@ public class ProduitAdapter extends ProduitHelper{
     }
 
     public Cursor getAllShotsOfAtype(String type_produit){
-        Cursor reponse = shotsDB.query(ProduitHelper .NOM_TABLE, new String[]{
+        Cursor reponse = produitDB.query(ProduitHelper .NOM_TABLE, new String[]{
                         ProduitHelper.KEY_ID, ProduitHelper.KEY_NAME, ProduitHelper.KEY_TYPE,
                         ProduitHelper.KEY_PRIX}, ProduitHelper.KEY_TYPE + " = " + type_produit, null, null,
                 null, null);
