@@ -10,6 +10,7 @@ public class Produit {
     protected String typeProduit;
     protected double prix;
 
+
     public String getNameProduit() {
         return nameProduit;
     }
