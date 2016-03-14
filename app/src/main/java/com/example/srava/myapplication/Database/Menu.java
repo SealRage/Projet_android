@@ -55,7 +55,6 @@ public class Menu {
     }
 
     public Menu(int idMenu, String nameMenu, int typeMenu, double prix, ArrayList<Produit> composantMenu) {
-        this.idMenu = idMenu;
         this.nameMenu = nameMenu;
         this.typeMenu = typeMenu;
         this.prix = prix;
