@@ -87,8 +87,6 @@ public class ProduitAdapter extends ProduitHelper{
                 null, null);
         return reponse;
     }
-
-
 }
 
 
