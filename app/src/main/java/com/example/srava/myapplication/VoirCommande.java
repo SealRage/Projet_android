@@ -99,13 +99,13 @@ public class VoirCommande extends android.support.v4.app.Fragment {
         final int cartSize = aController.getCommande().getCommandeSize();
 
 
-        // Récupération de la listeview
+        // RÃ©cupÃ©ration de la listeview
         _activityList = (ListView) view.findViewById(R.id.ListView_Menu);
 
         // Remplissage de la liste avec la HashMap
         ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
 
-        //On met le forpour tout récupérer
+        //On met le forpour tout rÃ©cupÃ©rer
         // TODO : METTRE LE FOR
         if(cartSize >0)
         {
@@ -123,7 +123,7 @@ public class VoirCommande extends android.support.v4.app.Fragment {
         else
             showString = "\n\nShopping cart is empty.\n\n";
 
-        // Création d'un SimpleAdapter qui met en correspondance les items présents dans la list avec ceux de la vue
+        // CrÃ©ation d'un SimpleAdapter qui met en correspondance les items prÃ©sents dans la list avec ceux de la vue
         SimpleAdapter itemsAdapter = new SimpleAdapter(this.getActivity(), appItemList, R.layout.app_item,
                 new String[] {"TextAppTitle", "TextAppSummary", "App_icon"}, new int[] {R.id.TextAppTitle,
                 R.id.TextAppSummary, R.id.App_icon});
@@ -131,7 +131,7 @@ public class VoirCommande extends android.support.v4.app.Fragment {
         //instanciation des images dans la liste
         _activityList.setAdapter(itemsAdapter);
 
-        //override de onItemClick pour l'adapter à la liste view
+        //override de onItemClick pour l'adapter Ã  la liste view
         _activityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

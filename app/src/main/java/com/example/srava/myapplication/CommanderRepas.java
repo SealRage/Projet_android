@@ -100,7 +100,7 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
         // Récupération de la listeview
         _activityList = (ListView) view.findViewById(R.id.ListView_Menu);
 
-        // Remplissage de la liste avec la HashMap
+        //7 Remplissage de la liste avec la HashMap
         ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
         appItemList.add(fillHashMap("Formule Classique", "1 Sandwich + 2 parmi chips, eau, fruit", String.valueOf(R.drawable.telephone)));
         appItemList.add(fillHashMap("Formule Gourmand", "1 Sdch Spé + 2 parmi chips, eau, fruit", String.valueOf(R.drawable.telephone)));
