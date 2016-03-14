@@ -43,5 +43,5 @@ public class ProduitHelper extends SQLiteOpenHelper{
         Log.i("ShotsDBhelper", "Base mise a jour !!!");
         onCreate(db);
     }
-    }
+}
 
