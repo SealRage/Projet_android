@@ -1,17 +1,23 @@
 package com.example.srava.myapplication;
 
 import android.app.Activity;
+import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.srava.myapplication.Database.Menu;
@@ -38,7 +44,7 @@ public class VoirCommande extends android.support.v4.app.Fragment {
 
     String showString = "";
 
-    private ListView _activityList;
+    protected ListView _activityList;
     Activity activity = getActivity();
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -72,6 +78,9 @@ public class VoirCommande extends android.support.v4.app.Fragment {
 
 
         }
+        // Create the list fragment and add it as our sole content.
+
+
 
 
     }
@@ -132,48 +141,59 @@ public class VoirCommande extends android.support.v4.app.Fragment {
         _activityList.setAdapter(itemsAdapter);
 
         //override de onItemClick pour l'adapter à la liste view
-        _activityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        _activityList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-                switch (position) {
-                    case 0:
+            public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
 
-                        //TODO : METTRE UNE POP UP POUR LA SUPRESSION OU LA CONSULTATION
-                        Log.d(" ok ", " Menus ");
-                        myMenu = new Menu(0,"Classique",1,0.00,myProducts);
-                        break;
 
-                    case 1:
+                // Je  recupere l'element sur laquelle on a fait un appui long:
+                Menu myPr = aController.getProducts(position);
+                Log.d("Produit trouvé ", myPr.toString());
+                Log.d("vue trouvé ", String.valueOf(view));
+                Log.d("position trouvé ", String.valueOf(position));
 
-                        Log.d(" ok ", " Gourmand ");
-                        myMenu = new Menu(1,"Gourmand",2,0.00,myProducts);
-                        break;
+               // registerForContextMenu(view);
+                //Cursor c_index = (Cursor) arg0.getItemAtPosition(position);
+               // detail_id = c_index.getInt(c_index.getColumnIndexOrThrow(DbAdapter.KEY_RID))
+                Log.d(String.valueOf(getActivity()),"Test");
+                getActivity().openContextMenu(view);
 
-                    case 2:
 
-                        Log.d(" ok ", " Gourmand + ");
-                        myMenu = new Menu(2,"Gourmand +",3,0.00,myProducts);
-                        break;
-
-                    case 3:
-
-                        Log.d(" ok ", " Divers ");
-                        myMenu = new Menu(3,"Divers",0,0.00,myProducts);
-                        break;
-
-                    default:
-
-                        Log.d(" ok ", " Erreur ");
-                        Toast.makeText(getActivity(), "Erreur dans la matrice", Toast.LENGTH_SHORT).show();
-                        break;
-
-                }
+                return true;
 
             }
+
+
+
         });
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        Log.d(" open avant super ", " onCreateContextMenu ");
+        super.onCreateContextMenu(menu, v, menuInfo);
+        Log.d(" open ", " onCreateContextMenu ");
+        menu.add(android.view.Menu.NONE, R.id.a_item, android.view.Menu.NONE, "Menu A");
+        menu.add(android.view.Menu.NONE, R.id.b_item, android.view.Menu.NONE, "Menu B");
 
     }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        Log.d("enter "," onContextItemSelected");
+        switch(item.getItemId()) {
+            case R.id.a_item:
+                Log.i("ContextMenu", "Item 1a was chosen");
+                return true;
+            case R.id.b_item:
+                Log.i("ContextMenu", "Item 1b was chosen");
+                return true;
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+
 
     private HashMap<String, String> fillHashMap(String Title, String summary, String icon){
         HashMap<String, String> item = new HashMap<String, String>();

@@ -118,31 +118,32 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
         //override de onItemClick pour l'adapter à la liste view
         _activityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {Log.d(" ok ", " Gourmand + ");
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(" ok ", " switch ");
 
                 switch (position) {
                     case 0:
 
                         //TODO : METTRE UNE POP UP POUR LA SUPRESSION OU LA CONSULTATION
-                        Log.d(" ok ", " Menus ");
+                        Log.d(" position ", " Menus ");
                         myMenu = new Menu(0,"Classique",1,0.00,myProducts);
                         break;
 
                     case 1:
 
-                        Log.d(" ok ", " Gourmand ");
+                        Log.d(" position ", " Gourmand ");
                         myMenu = new Menu(1,"Gourmand",2,0.00,myProducts);
                         break;
 
                     case 2:
 
-                        Log.d(" ok ", " Gourmand + ");
+                        Log.d(" position ", " Gourmand + ");
                         myMenu = new Menu(2,"Gourmand +",3,0.00,myProducts);
                         break;
 
                     case 3:
 
-                        Log.d(" ok ", " Divers ");
+                        Log.d(" position ", " Divers ");
                         myMenu = new Menu(3,"Divers",0,0.00,myProducts);
                         break;
 
@@ -154,16 +155,16 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
 
                 }
 
-                Log.d("bis1",String.valueOf(aController));
-                Log.d("bis",String.valueOf(myMenu));
+                Log.d("val controller",String.valueOf(aController));
+                Log.d("val menu",String.valueOf(myMenu));
                 //store product object to arraylist in controller
                 aController.setProducts(myMenu);
-                Log.d(" ok ", String.valueOf(position));
+                Log.d(" val position ", String.valueOf(position));
                 // Get product instance for index
                 Menu tempProductObject = aController.getProducts(position);
 
                 //Check Product already exist in Cart or Not
-                if (!aController.getCommande().checkProductInCart(tempProductObject)) {
+           //     if (!aController.getCommande().checkProductInCart(tempProductObject)) {
                     Toast.makeText(getActivity(), "Added", Toast.LENGTH_LONG);
 
 
@@ -173,11 +174,13 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
 
                     Toast.makeText(getActivity(), "Now Cart size: " + aController.getCommande().getCommandeSize(),
                             Toast.LENGTH_LONG).show();
-                } else {
+         //       } else {
                     // Cart product arraylist contains Product
-                    Toast.makeText(getActivity(), "Product " + (position) + " already added in cart.",
-                            Toast.LENGTH_LONG).show();
-                }
+              //      Toast.makeText(getActivity(), "Product " + (position) + " already added in cart.",
+              //              Toast.LENGTH_LONG).show();
+                //
+                //
+         //       }
 
             }
 
