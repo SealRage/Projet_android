@@ -43,7 +43,7 @@ public class ProduitAdapter extends ProduitHelper{
     }
 
 
-    public long insertShot(String nameProduit, String typeProduit, double prix){
+    public long insertProduit(String nameProduit, String typeProduit, double prix){
         ContentValues newValue = new ContentValues();
         newValue.put(ProduitHelper.KEY_NAME, nameProduit);
         newValue.put(ProduitHelper.KEY_TYPE, typeProduit);
@@ -53,7 +53,7 @@ public class ProduitAdapter extends ProduitHelper{
     }
 
 
-    public boolean updateShot(int ligneID,String nameProduit, String typeProduit, double prix){
+    public boolean updateProduit(int ligneID,String nameProduit, String typeProduit, double prix){
         ContentValues newValue = new ContentValues();
         newValue.put(dbHelper.KEY_NAME, nameProduit);
         newValue.put(dbHelper.KEY_TYPE, typeProduit);
@@ -63,7 +63,7 @@ public class ProduitAdapter extends ProduitHelper{
                 ProduitHelper.KEY_ID + " = " + ligneID, null) > 0;
     }
 
-    public boolean removeShot(long ligneID){
+    public boolean removeProduit(long ligneID){
         return produitDB.delete(ProduitHelper.NOM_TABLE, ProduitHelper.KEY_ID + " = " + ligneID,
                 null)>0;
     }
@@ -72,7 +72,7 @@ public class ProduitAdapter extends ProduitHelper{
         return produitDB.query(dbHelper.NOM_TABLE, new String[]{ProduitHelper.KEY_ID,
                 ProduitHelper.KEY_NAME, ProduitHelper.KEY_TYPE, ProduitHelper.KEY_PRIX}, null, null, null, null, null); }
 
-    public Cursor getSingleShot(long ligneID){
+    public Cursor getSingleProduit(long ligneID){
         Cursor reponse = produitDB.query(ProduitHelper .NOM_TABLE, new String[]{
                         ProduitHelper.KEY_ID, ProduitHelper.KEY_NAME, ProduitHelper.KEY_TYPE,
                         ProduitHelper.KEY_PRIX}, ProduitHelper.KEY_ID + " = " + ligneID, null, null,
@@ -80,7 +80,7 @@ public class ProduitAdapter extends ProduitHelper{
         return reponse;
     }
 
-    public Cursor getAllShotsOfAtype(String type_produit){
+    public Cursor getAllProduitOfAtype(String type_produit){
         Cursor reponse = produitDB.query(ProduitHelper .NOM_TABLE, new String[]{
                         ProduitHelper.KEY_ID, ProduitHelper.KEY_NAME, ProduitHelper.KEY_TYPE,
                         ProduitHelper.KEY_PRIX}, ProduitHelper.KEY_TYPE + " = " + type_produit, null, null,

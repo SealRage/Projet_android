@@ -43,7 +43,7 @@ public class MenuAdapter extends MenuHelper{
         }
 
 
-        public long insertShot(String nameMenu, int typeMenu, double prix, List<Produit> composantMenu){
+        public long insertMenu(String nameMenu, int typeMenu, double prix, List<Produit> composantMenu){
             ContentValues newValue = new ContentValues();
             newValue.put(dbHelper.KEY_NAME, nameMenu);
             newValue.put(dbHelper.KEY_TYPE, typeMenu);
@@ -54,7 +54,7 @@ public class MenuAdapter extends MenuHelper{
         }
 
 
-        public boolean updateShot(int ligneID, String nameMenu, int typeMenu, double prix, List<Produit> composantMenu){
+        public boolean updateMenu(int ligneID, String nameMenu, int typeMenu, double prix, List<Produit> composantMenu){
             ContentValues newValue = new ContentValues();
             newValue.put(dbHelper.KEY_NAME, nameMenu);
             newValue.put(dbHelper.KEY_TYPE, typeMenu);
@@ -65,7 +65,7 @@ public class MenuAdapter extends MenuHelper{
                     MenuHelper.KEY_ID + " = " + ligneID, null) > 0;
         }
 
-        public boolean removeShot(long ligneID){
+        public boolean removeMenu(long ligneID){
             return menuDB.delete(MenuHelper.NOM_TABLE, MenuHelper.KEY_ID + " = " + ligneID,
                     null)>0;
         }
@@ -74,7 +74,7 @@ public class MenuAdapter extends MenuHelper{
             return menuDB.query(dbHelper.NOM_TABLE, new String[]{ MenuHelper.KEY_ID,
                     MenuHelper.KEY_NAME, MenuHelper.KEY_TYPE, MenuHelper.KEY_PRIX, MenuHelper.KEY_COMP },null, null, null, null, null, null); }
 
-        public Cursor getSingleShot(long ligneID){
+        public Cursor getSingleMenu(long ligneID){
             Cursor reponse = menuDB.query(MenuHelper .NOM_TABLE, new String[]{
                             MenuHelper.KEY_ID, MenuHelper.KEY_NAME, MenuHelper.KEY_TYPE,
                             MenuHelper.KEY_PRIX,MenuHelper.KEY_COMP }, MenuHelper.KEY_ID + " = " + ligneID, null, null, null,
@@ -82,7 +82,7 @@ public class MenuAdapter extends MenuHelper{
             return reponse;
         }
 
-        public Cursor getAllShotsOfAtype(String type_menu){
+        public Cursor getAllMenuOfAtype(String type_menu){
             Cursor reponse = menuDB.query(MenuHelper .NOM_TABLE, new String[]{
                             MenuHelper.KEY_ID, MenuHelper.KEY_NAME, MenuHelper.KEY_TYPE,
                             MenuHelper.KEY_PRIX, MenuHelper.KEY_COMP }, MenuHelper.KEY_TYPE + " = " + type_menu, null, null,

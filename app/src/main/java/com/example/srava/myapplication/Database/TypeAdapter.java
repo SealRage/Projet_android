@@ -41,15 +41,16 @@ public class TypeAdapter extends TypeHelper{
     }
 
 
-    public long insertShot(String nameType){
+    public long insertType(String nameType){
         ContentValues newValue = new ContentValues();
         newValue.put(dbHelper.KEY_NAME, nameType);
 
         return typeDB.insert(TypeHelper.NOM_TABLE, null, newValue);
+
     }
 
 
-    public boolean updateShot(int ligneID, String nameType){
+    public boolean updateType(int ligneID, String nameType){
         ContentValues newValue = new ContentValues();
         newValue.put(dbHelper.KEY_NAME, nameType);
 
@@ -57,7 +58,7 @@ public class TypeAdapter extends TypeHelper{
                 TypeHelper.KEY_ID + " = " + ligneID, null) > 0;
     }
 
-    public boolean removeShot(long ligneID){
+    public boolean removeType(long ligneID){
         return typeDB.delete(TypeHelper.NOM_TABLE, TypeHelper.KEY_ID + " = " + ligneID,
                 null)>0;
     }
@@ -66,7 +67,7 @@ public class TypeAdapter extends TypeHelper{
         return typeDB.query(TypeHelper.NOM_TABLE, new String[]{ TypeHelper.KEY_ID,
                 TypeHelper.KEY_NAME}, null, null, null, null, null); }
 
-    public Cursor getSingleShot(long ligneID){
+    public Cursor getSingleType(long ligneID){
         Cursor reponse = typeDB.query(TypeHelper .NOM_TABLE, new String[]{
                         TypeHelper.KEY_ID, TypeHelper.KEY_NAME}, TypeHelper.KEY_ID + " = " + ligneID, null,null,null,null);
         return reponse;
