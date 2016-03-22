@@ -46,6 +46,7 @@ public class TypeAdapter extends TypeHelper{
         newValue.put(dbHelper.KEY_NAME, nameType);
 
         return typeDB.insert(TypeHelper.NOM_TABLE, null, newValue);
+
     }
 
 
