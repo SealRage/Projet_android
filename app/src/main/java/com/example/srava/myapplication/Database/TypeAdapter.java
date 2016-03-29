@@ -13,7 +13,7 @@ import android.util.Log;
 public class TypeAdapter extends TypeHelper{
 
 
-    private static final String DATABASE_NAME = "cafet";
+    private static final String DATABASE_NAME = "Lunch";
     private static final int DATABASE_VERSION = 1;
     private TypeHelper dbHelper; // r?f?rence vers le Helper de gestion de la base
     private SQLiteDatabase typeDB; // reference vers une base de donn?es
@@ -21,7 +21,7 @@ public class TypeAdapter extends TypeHelper{
 
     // constructeur
     public TypeAdapter(Context context) {
-        super(context, "cafet.db", null, 1);
+        super(context, "Lunch.db", null, 1);
         dbHelper = new TypeHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

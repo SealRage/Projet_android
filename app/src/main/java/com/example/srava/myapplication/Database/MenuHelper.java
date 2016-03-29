@@ -12,7 +12,7 @@ public class MenuHelper extends SQLiteOpenHelper {
 
     // membres public permettant de dfinir les champs de la base
     public static final String NOM_TABLE = "Menu";
-    public static final String KEY_ID = "id_menu";
+    public static final String KEY_ID = "_id_menu";
     public static final String KEY_NAME = "nom_menu";
     public static final String KEY_TYPE = "type_menu";
     public static final String KEY_PRIX = "prix_menu";

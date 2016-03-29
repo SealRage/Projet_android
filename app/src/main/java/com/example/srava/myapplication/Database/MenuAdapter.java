@@ -15,7 +15,7 @@ import java.util.List;
 public class MenuAdapter extends MenuHelper{
 
 
-        private static final String DATABASE_NAME = "cafet";
+        private static final String DATABASE_NAME = "Lunch";
         private static final int DATABASE_VERSION = 1;
         private MenuHelper dbHelper; // r?f?rence vers le Helper de gestion de la base
         private SQLiteDatabase menuDB; // reference vers une base de donn?es
@@ -23,7 +23,7 @@ public class MenuAdapter extends MenuHelper{
 
         // constructeur
         public MenuAdapter(Context context) {
-            super(context, "cafet.db", null, 1);
+            super(context, "Lunch.db", null, 1);
             dbHelper = new MenuHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
