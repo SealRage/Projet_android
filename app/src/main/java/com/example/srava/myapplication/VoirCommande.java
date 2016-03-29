@@ -33,11 +33,12 @@ public class VoirCommande extends android.support.v4.app.Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    protected Menu myPr;
     protected Menu myMenu;
     protected ArrayList<Produit> myProducts;
 
     //Get Global Controller Class object (see application tag in AndroidManifest.xml)
-    final Controller aController = (Controller) getContext();
+     Controller aController = (Controller) getContext();
 
     // Get Cart Size
    // final int cartSize = aController.getCommande().getCommandeSize();
@@ -102,61 +103,20 @@ public class VoirCommande extends android.support.v4.app.Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final Controller aController = (Controller) getActivity().getApplicationContext();
 
-        // Get Cart Size
-        final int cartSize = aController.getCommande().getCommandeSize();
+        activity = getActivity();
 
 
-        // Récupération de la listeview
-        _activityList = (ListView) view.findViewById(R.id.ListView_Menu);
-
-        // Remplissage de la liste avec la HashMap
-        ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
-
-        //On met le forpour tout récupérer
-        // TODO : METTRE LE FOR
-        if(cartSize >0)
-        {
-
-            for(int i=0;i<cartSize;i++)
-            {
-                //Get product details
-                String pName = aController.getCommande().getProducts(i).getNameMenu();
-                String pDesc = String.valueOf(aController.getCommande().getProducts(i).getComposantMenu());
-              //  String pDisc   	= aController.getCommande().getProducts(i).getDrawable();
-
-                appItemList.add(fillHashMap(pName, pDesc, String.valueOf(R.drawable.telephone)));
-            }
-        }
-        else
-            showString = "\n\nShopping cart is empty.\n\n";
-
-        // Création d'un SimpleAdapter qui met en correspondance les items présents dans la list avec ceux de la vue
-        SimpleAdapter itemsAdapter = new SimpleAdapter(this.getActivity(), appItemList, R.layout.app_item,
-                new String[] {"TextAppTitle", "TextAppSummary", "App_icon"}, new int[] {R.id.TextAppTitle,
-                R.id.TextAppSummary, R.id.App_icon});
-
-        //instanciation des images dans la liste
-        _activityList.setAdapter(itemsAdapter);
+        MajView();
 
         //override de onItemClick pour l'adapter à la liste view
-        _activityList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+    /*    _activityList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
 
 
-                // Je  recupere l'element sur laquelle on a fait un appui long:
-                Menu myPr = aController.getProducts(position);
-                Log.d("Produit trouvé ", myPr.toString());
-                Log.d("vue trouvé ", String.valueOf(view));
-                Log.d("position trouvé ", String.valueOf(position));
 
-               // registerForContextMenu(view);
-                //Cursor c_index = (Cursor) arg0.getItemAtPosition(position);
-               // detail_id = c_index.getInt(c_index.getColumnIndexOrThrow(DbAdapter.KEY_RID))
-                Log.d(String.valueOf(getActivity()),"Test");
-                getActivity().openContextMenu(view);
+
 
 
                 return true;
@@ -164,32 +124,44 @@ public class VoirCommande extends android.support.v4.app.Fragment {
             }
 
 
-
-        });
+        });*/
     }
+
+
+
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         Log.d(" open avant super ", " onCreateContextMenu ");
         super.onCreateContextMenu(menu, v, menuInfo);
         Log.d(" open ", " onCreateContextMenu ");
-        menu.add(android.view.Menu.NONE, R.id.a_item, android.view.Menu.NONE, "Menu A");
-        menu.add(android.view.Menu.NONE, R.id.b_item, android.view.Menu.NONE, "Menu B");
+        // Je  recupere l'element sur laquelle on a fait un appui long:
+       // Menu myPr = aController.getProducts((int) position);
+//        Log.d("Produit trouvé ", myPr.toString());
+        Log.d("position trouvé ", menuInfo.toString());
+        menu.add(android.view.Menu.NONE, R.id.a_item, android.view.Menu.NONE, "Annuler");
+        menu.add(android.view.Menu.NONE, R.id.b_item, android.view.Menu.NONE, "Supprimer");
 
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        Log.d("enter "," onContextItemSelected");
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Log.d("enter ",item.toString());
+        Log.d("info ", String.valueOf(info.id));
         switch(item.getItemId()) {
             case R.id.a_item:
                 Log.i("ContextMenu", "Item 1a was chosen");
                 return true;
             case R.id.b_item:
                 Log.i("ContextMenu", "Item 1b was chosen");
+                aController.removeProducts(aController.getCommande().getProducts((int) info.id));
+                Log.d("Remove Menu ", (aController.getProducts((int) info.id)).toString());
+                MajView();
                 return true;
-        }
 
+
+        }
         return super.onContextItemSelected(item);
     }
 
@@ -208,4 +180,43 @@ public class VoirCommande extends android.support.v4.app.Fragment {
         // store data in the bundle
     }
 
+
+    public void MajView(){
+        aController = (Controller) getActivity().getApplicationContext();
+        View view = getView();
+        // Get Cart Size
+        final int cartSize = aController.getCommande().getCommandeSize();
+        // Récupération de la listeview
+        _activityList = (ListView) view.findViewById(R.id.ListView_Menu);
+
+        // Remplissage de la liste avec la HashMap
+        ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
+
+        //On met le forpour tout récupérer
+        // TODO : METTRE LE FOR
+        if(cartSize >0)
+        {
+
+            for(int i=0;i<cartSize;i++)
+            {
+                //Get product details
+                String pName = aController.getCommande().getProducts(i).getNameMenu();
+                String pDesc = String.valueOf(aController.getCommande().getProducts(i).getComposantMenu());
+                //  String pDisc   	= aController.getCommande().getProducts(i).getDrawable();
+
+                appItemList.add(fillHashMap(pName, pDesc, String.valueOf(R.drawable.telephone)));
+            }
+        }
+        else
+            showString = "\n\nShopping cart is empty.\n\n";
+
+        // Création d'un SimpleAdapter qui met en correspondance les items présents dans la list avec ceux de la vue
+        SimpleAdapter itemsAdapter = new SimpleAdapter(this.getActivity(), appItemList, R.layout.app_item,
+                new String[] {"TextAppTitle", "TextAppSummary", "App_icon"}, new int[] {R.id.TextAppTitle,
+                R.id.TextAppSummary, R.id.App_icon});
+
+        //instanciation des images dans la liste
+        _activityList.setAdapter(itemsAdapter);
+        registerForContextMenu(_activityList);
+    }
 }

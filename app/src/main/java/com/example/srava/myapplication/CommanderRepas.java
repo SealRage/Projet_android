@@ -126,19 +126,19 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
 
                         //TODO : METTRE UNE POP UP POUR LA SUPRESSION OU LA CONSULTATION
                         Log.d(" position ", " Menus ");
-                        myMenu = new Menu(0,"Classique",1,0.00,myProducts);
+                        myMenu = new Menu(0,"Formule Classique",1,0.00,myProducts);
                         break;
 
                     case 1:
 
                         Log.d(" position ", " Gourmand ");
-                        myMenu = new Menu(1,"Gourmand",2,0.00,myProducts);
+                        myMenu = new Menu(1,"Formule Gourmand",2,0.00,myProducts);
                         break;
 
                     case 2:
 
                         Log.d(" position ", " Gourmand + ");
-                        myMenu = new Menu(2,"Gourmand +",3,0.00,myProducts);
+                        myMenu = new Menu(2,"Formule Gourmand +",3,0.00,myProducts);
                         break;
 
                     case 3:
