@@ -37,6 +37,8 @@ public class MenuHelper extends SQLiteOpenHelper {
         db.execSQL(DATABASE_CREATE);
         Log.i("ShotsDBhelper", "Database created with instruction : " +
                 DATABASE_CREATE);
+
+
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
