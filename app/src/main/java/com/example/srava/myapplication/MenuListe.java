@@ -70,9 +70,6 @@ public class MenuListe extends ActionBarActivity
                 myFragment = new RecupererMenu();
                 break;
             case 2 :
-                myFragment = new AnnulerMenu();
-                break;
-            case 3 :
                 myFragment = new VoirCommande();
                 break;
             default:
@@ -96,9 +93,6 @@ public class MenuListe extends ActionBarActivity
                 mTitle = getString(R.string.RecupM);
                 break;
             case 3:
-                mTitle = getString(R.string.AnnulerM);
-                break;
-            case 4:
                 mTitle = getString(R.string.voirCommande);
                 break;
             default:

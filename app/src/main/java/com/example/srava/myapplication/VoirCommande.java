@@ -33,6 +33,7 @@ public class VoirCommande extends android.support.v4.app.Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    protected String draw;
     protected Menu myPr;
     protected Menu myMenu;
     protected ArrayList<Produit> myProducts;
@@ -151,12 +152,12 @@ public class VoirCommande extends android.support.v4.app.Fragment {
         Log.d("info ", String.valueOf(info.id));
         switch(item.getItemId()) {
             case R.id.a_item:
-                Log.i("ContextMenu", "Item 1a was chosen");
+                Log.i("ContextMenu", "Item Annuler was chosen");
                 return true;
             case R.id.b_item:
-                Log.i("ContextMenu", "Item 1b was chosen");
+                Log.i("ContextMenu", "Item Supprimer was chosen");
                 aController.removeProducts(aController.getCommande().getProducts((int) info.id));
-                Log.d("Remove Menu ", (aController.getProducts((int) info.id)).toString());
+//                Log.d("Remove Menu ", (aController.getProducts((int) info.id)).toString());
                 MajView();
                 return true;
 
@@ -203,8 +204,24 @@ public class VoirCommande extends android.support.v4.app.Fragment {
                 String pName = aController.getCommande().getProducts(i).getNameMenu();
                 String pDesc = String.valueOf(aController.getCommande().getProducts(i).getComposantMenu());
                 //  String pDisc   	= aController.getCommande().getProducts(i).getDrawable();
+                if(aController.getCommande().getProducts(i).getNameMenu().equals("Formule Gourmand")) {
+                    draw = String.valueOf(R.drawable.menugourmand);
 
-                appItemList.add(fillHashMap(pName, pDesc, String.valueOf(R.drawable.telephone)));
+                }
+                else if(aController.getCommande().getProducts(i).getNameMenu().equals("Formule Gourmand +")) {
+                    draw = String.valueOf(R.drawable.menuplus);
+
+                }
+                else if(aController.getCommande().getProducts(i).getNameMenu().equals("Formule Classique")) {
+                    draw = String.valueOf(R.drawable.menuclassqiue);
+
+                }
+                else if(aController.getCommande().getProducts(i).getNameMenu().equals("Divers")) {
+                    draw = String.valueOf(R.drawable.divers);
+
+                }
+
+                appItemList.add(fillHashMap(pName, pDesc, draw));
             }
         }
         else

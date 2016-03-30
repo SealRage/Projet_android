@@ -46,4 +46,12 @@ public class Controller extends Application {
         return myMenu.size();
     }
 
+
+    @Override
+    public String toString() {
+        return "Controller{" +
+                "myCommande=" + myCommande +
+                ", myMenu=" + myMenu +
+                '}';
+    }
 }

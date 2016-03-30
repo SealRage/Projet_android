@@ -26,6 +26,7 @@ import com.example.srava.myapplication.Database.Menu;
 import com.example.srava.myapplication.Database.MenuAdapter;
 import com.example.srava.myapplication.Database.MenuHelper;
 import com.example.srava.myapplication.Database.Produit;
+import com.example.srava.myapplication.Database.ProduitAdapter;
 import com.example.srava.myapplication.Database.ProduitHelper;
 import com.example.srava.myapplication.Database.TypeAdapter;
 import com.example.srava.myapplication.Database.TypeHelper;
@@ -50,6 +51,7 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
     SQLiteOpenHelper myHelper;
     TypeAdapter insertTypeDB;
     MenuAdapter insertMenuDB;
+    ProduitAdapter insertProd;
     //Get Global Controller Class object (see application tag in AndroidManifest.xml)
     final Controller aController = (Controller) getContext();
 
@@ -109,52 +111,27 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
         insertMenuDB = new MenuAdapter( getActivity().getApplicationContext());
         insertTypeDB = new TypeAdapter( getActivity().getApplicationContext());
+        insertProd = new ProduitAdapter( getActivity().getApplicationContext());
 
-
-        insertTypeDB.open();
-
-
-        insertTypeDB.close();
-
-
-
-
-
-
-
-        insertMenuDB = new MenuAdapter( getActivity().getApplicationContext());
         insertMenuDB.open();
         insertMenuDB.close();
 
         insertMenuDB.open();
-        insertMenuDB.insertMenu("Groumand", 1, 3, new ArrayList<Produit>());
-        insertMenuDB.insertMenu("Plus",1,4, new ArrayList<Produit>());
-        insertMenuDB.insertMenu("Classique",1,5, new ArrayList<Produit>());
-        Log.wtf("Open1", "Open");
-        populate();
-        ((ListView)view.findViewById(R.id.ListView_Menu)).setAdapter(populate());
-        insertMenuDB.close();
 
-        final Controller aController = (Controller) getActivity().getApplicationContext();
         // Récupération de la listeview
         _activityList = (ListView) view.findViewById(R.id.ListView_Menu);
 
-        //7 Remplissage de la liste avec la HashMap
-        ArrayList<HashMap<String,String>> appItemList = new ArrayList<HashMap<String,String>>();
-        appItemList.add(fillHashMap("Formule Classique", "1 Sandwich + 2 parmi chips, eau, fruit", String.valueOf(R.drawable.telephone)));
-        appItemList.add(fillHashMap("Formule Gourmand", "1 Sdch Spé + 2 parmi chips, eau, fruit", String.valueOf(R.drawable.telephone)));
-        appItemList.add(fillHashMap("Formule Gourmand +", "Formule gourmand + 1 canette", String.valueOf(R.drawable.telephone)));
-        appItemList.add(fillHashMap("Divers", "Vente au détail", String.valueOf(R.drawable.telephone)));
+        _activityList.setAdapter(populate());
+        insertMenuDB.close();
 
-        // Création d'un SimpleAdapter qui met en correspondance les items présents dans la list avec ceux de la vue
-        SimpleAdapter itemsAdapter = new SimpleAdapter(this.getActivity(), appItemList, R.layout.app_item,
-                new String[] {"TextAppTitle", "TextAppSummary", "App_icon"}, new int[] {R.id.TextAppTitle,
-                R.id.TextAppSummary, R.id.App_icon});
+        final Controller aController = (Controller) getActivity().getApplicationContext();
 
-        //instanciation des images dans la liste
-        _activityList.setAdapter(itemsAdapter);
+
 
         //override de onItemClick pour l'adapter à la liste view
         _activityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -196,13 +173,13 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
 
                 }
 
-                Log.d("val controller",String.valueOf(aController));
-                Log.d("val menu",String.valueOf(myMenu));
+               // Log.d("val controller",String.valueOf(aController));
+               // Log.d("val menu",String.valueOf(myMenu));
                 //store product object to arraylist in controller
-                aController.setProducts(myMenu);
-                Log.d(" val position ", String.valueOf(position));
+              //  aController.setProducts(myMenu);
+              //  Log.d(" val position ", String.valueOf(position));
                 // Get product instance for index
-                Menu tempProductObject = aController.getProducts(position);
+               // Menu tempProductObject = aController.getProducts(position);
 
                 //Check Product already exist in Cart or Not
            //     if (!aController.getCommande().checkProductInCart(tempProductObject)) {
@@ -211,17 +188,11 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
 
                     // Product not Exist in cart so add product to
                     // Cart product arraylist
-                    aController.getCommande().setProducts(tempProductObject);
+                    aController.getCommande().setProducts(myMenu);
 
                     Toast.makeText(getActivity(), "Now Cart size: " + aController.getCommande().getCommandeSize(),
-                            Toast.LENGTH_LONG).show();
-         //       } else {
-                    // Cart product arraylist contains Product
-              //      Toast.makeText(getActivity(), "Product " + (position) + " already added in cart.",
-              //              Toast.LENGTH_LONG).show();
-                //
-                //
-         //       }
+                            Toast.LENGTH_SHORT).show();
+
 
             }
 
@@ -247,7 +218,7 @@ public class CommanderRepas extends android.support.v4.app.Fragment {
 
     private ListAdapter populate(){
         ListAdapter adapter = new SimpleCursorAdapter( getActivity().getApplicationContext(),
-                R.layout.fragment_commander_repas, insertMenuDB.getAllData(),
+                R.layout.app_item, insertMenuDB.getAllData(),
                 new String[] {MenuHelper.KEY_NAME, MenuHelper.KEY_PRIX},
                 new int[] {R.id.TextAppTitle, R.id.TextAppSummary});
         // Bind to our new adapter.

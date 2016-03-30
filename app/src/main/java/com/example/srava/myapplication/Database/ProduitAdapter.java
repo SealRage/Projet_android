@@ -16,7 +16,7 @@ public class ProduitAdapter extends ProduitHelper{
 
 
     private static final String DATABASE_NAME = "Lunch";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private ProduitHelper dbHelper; // r?f?rence vers le Helper de gestion de la base
     private SQLiteDatabase produitDB; // reference vers une base de donn?es
 
@@ -55,9 +55,9 @@ public class ProduitAdapter extends ProduitHelper{
 
     public boolean updateProduit(int ligneID,String nameProduit, String typeProduit, double prix){
         ContentValues newValue = new ContentValues();
-        newValue.put(dbHelper.KEY_NAME, nameProduit);
-        newValue.put(dbHelper.KEY_TYPE, typeProduit);
-        newValue.put(dbHelper.KEY_PRIX, prix);
+        newValue.put(ProduitHelper.KEY_NAME, nameProduit);
+        newValue.put(ProduitHelper.KEY_TYPE, typeProduit);
+        newValue.put(ProduitHelper.KEY_PRIX, prix);
 
         return produitDB.update(ProduitHelper.NOM_TABLE, newValue,
                 ProduitHelper.KEY_ID + " = " + ligneID, null) > 0;
@@ -69,7 +69,7 @@ public class ProduitAdapter extends ProduitHelper{
     }
 
     public Cursor getAllData(){ // select *
-        return produitDB.query(dbHelper.NOM_TABLE, new String[]{ProduitHelper.KEY_ID,
+        return produitDB.query(ProduitHelper.NOM_TABLE, new String[]{ProduitHelper.KEY_ID,
                 ProduitHelper.KEY_NAME, ProduitHelper.KEY_TYPE, ProduitHelper.KEY_PRIX}, null, null, null, null, null); }
 
     public Cursor getSingleProduit(long ligneID){

@@ -14,7 +14,7 @@ public class TypeAdapter extends TypeHelper{
 
 
     private static final String DATABASE_NAME = "Lunch";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private TypeHelper dbHelper; // r?f?rence vers le Helper de gestion de la base
     private SQLiteDatabase typeDB; // reference vers une base de donn?es
 
@@ -43,7 +43,7 @@ public class TypeAdapter extends TypeHelper{
 
     public long insertType(String nameType){
         ContentValues newValue = new ContentValues();
-        newValue.put(dbHelper.KEY_NAME, nameType);
+        newValue.put(TypeHelper.KEY_NAME, nameType);
 
         return typeDB.insert(TypeHelper.NOM_TABLE, null, newValue);
 
@@ -52,7 +52,7 @@ public class TypeAdapter extends TypeHelper{
 
     public boolean updateType(int ligneID, String nameType){
         ContentValues newValue = new ContentValues();
-        newValue.put(dbHelper.KEY_NAME, nameType);
+        newValue.put(TypeHelper.KEY_NAME, nameType);
 
         return typeDB.update(TypeHelper.NOM_TABLE, newValue,
                 TypeHelper.KEY_ID + " = " + ligneID, null) > 0;

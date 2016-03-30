@@ -17,7 +17,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.srava.myapplication.Database.Menu;
 import com.google.zxing.WriterException;
+
+import java.util.List;
 
 
 public class RecupererMenu extends android.support.v4.app.Fragment {
@@ -30,8 +33,9 @@ public class RecupererMenu extends android.support.v4.app.Fragment {
     private ImageView mImageQR;
     private ProgressBar mProgress;
     private Bitmap mBitmapQR;
+    final Controller aController = (Controller) getContext();
 
-
+    protected List<Menu> myCommande;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -80,6 +84,7 @@ public class RecupererMenu extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.qr_main, container, false);
+        final Controller aController = (Controller) getActivity().getApplicationContext();
 
         final WatchViewStub stub = (WatchViewStub) view.findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
@@ -123,8 +128,11 @@ public class RecupererMenu extends android.support.v4.app.Fragment {
                 final int marginSize = params[0];
                 final int width = metrics.widthPixels;;
                 final int height = metrics.heightPixels;
+                final Controller aController = (Controller) getActivity().getApplicationContext();
 
-                mBitmapQR = GenrateQR.generateBitmap("ntm", width, width,
+                myCommande = aController.getCommande().getRecapChoix();
+
+                mBitmapQR = GenrateQR.generateBitmap(String.valueOf(myCommande), width, width,
                         marginSize, colorQR, colorBackQR);
             } catch (IllegalArgumentException iae) {
                 Log.e(TAG, "Invalid arguments for encoding QR");

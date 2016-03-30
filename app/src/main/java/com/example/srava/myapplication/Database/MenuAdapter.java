@@ -16,7 +16,7 @@ public class MenuAdapter extends MenuHelper{
 
 
         private static final String DATABASE_NAME = "Lunch";
-        private static final int DATABASE_VERSION = 1;
+        private static final int DATABASE_VERSION = 2;
         private MenuHelper dbHelper; // r?f?rence vers le Helper de gestion de la base
         private SQLiteDatabase menuDB; // reference vers une base de donn?es
 
@@ -45,10 +45,10 @@ public class MenuAdapter extends MenuHelper{
 
         public long insertMenu(String nameMenu, int typeMenu, double prix, List<Produit> composantMenu){
             ContentValues newValue = new ContentValues();
-            newValue.put(dbHelper.KEY_NAME, nameMenu);
-            newValue.put(dbHelper.KEY_TYPE, typeMenu);
-            newValue.put(dbHelper.KEY_PRIX, prix);
-            newValue.put(dbHelper.KEY_COMP, String.valueOf(composantMenu));
+            newValue.put(MenuHelper.KEY_NAME, nameMenu);
+            newValue.put(MenuHelper.KEY_TYPE, typeMenu);
+            newValue.put(MenuHelper.KEY_PRIX, prix);
+            newValue.put(MenuHelper.KEY_COMP, String.valueOf(composantMenu));
 
             return menuDB.insert(MenuHelper.NOM_TABLE, null, newValue);
         }
@@ -56,10 +56,10 @@ public class MenuAdapter extends MenuHelper{
 
         public boolean updateMenu(int ligneID, String nameMenu, int typeMenu, double prix, List<Produit> composantMenu){
             ContentValues newValue = new ContentValues();
-            newValue.put(dbHelper.KEY_NAME, nameMenu);
-            newValue.put(dbHelper.KEY_TYPE, typeMenu);
-            newValue.put(dbHelper.KEY_PRIX, prix);
-            newValue.put(dbHelper.KEY_COMP, String.valueOf(composantMenu));
+            newValue.put(MenuHelper.KEY_NAME, nameMenu);
+            newValue.put(MenuHelper.KEY_TYPE, typeMenu);
+            newValue.put(MenuHelper.KEY_PRIX, prix);
+            newValue.put(MenuHelper.KEY_COMP, String.valueOf(composantMenu));
 
             return menuDB.update(MenuHelper.NOM_TABLE, newValue,
                     MenuHelper.KEY_ID + " = " + ligneID, null) > 0;
@@ -71,7 +71,7 @@ public class MenuAdapter extends MenuHelper{
         }
 
         public Cursor getAllData(){ // select *
-            return menuDB.query(dbHelper.NOM_TABLE, new String[]{ MenuHelper.KEY_ID,
+            return menuDB.query(MenuHelper.NOM_TABLE, new String[]{ MenuHelper.KEY_ID,
                     MenuHelper.KEY_NAME, MenuHelper.KEY_TYPE, MenuHelper.KEY_PRIX, MenuHelper.KEY_COMP },null, null, null, null, null, null); }
 
         public Cursor getSingleMenu(long ligneID){
